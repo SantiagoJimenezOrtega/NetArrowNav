@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Clone</title>
+    <link rel="stylesheet" href="css/stylesIndex.css" />
+    <link rel="stylesheet" href="css/Nav.css" />
+    <script src="js/moviesFetch.js"></script>
+    <script src="components/Nav/Nav.js"></script>
+    <!-- include CAPH 3.0.1 default package -->
+    <link
+      href="lib/caph/3.0.1/caph.min.css"
+      rel="stylesheet"
+      type="text/stylesheet"
+    />
+    <!-- include jQuery file (you can use AngularJS & jQuery in your environment) -->
+    <script
+      src="lib/caph/3.0.1/bower_components/jquery/dist/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="lib/caph/3.0.1/bower_components/angular/angular.min.js"
+      type="text/javascript"
+    ></script>
+    <!-- include the CAPH Package for AngularJS -->
+    <script src="lib/caph/3.0.1/caph-angular.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <img
+        src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
+        alt="netflix logo"
+        class="logo"
+      />
+      <nav>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/index.html">Movies</a></li>
+          <li><a href="/index.html">TV Shows</a></li>
+          <li><a href="/index.html">Latest</a></li>
+          <li><a href="/index.html">My List</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <button>Search</button>
+        <button>Notifications</button>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117"
+          alt="user profile picture"
+          class="profile-image"
+        />
+      </nav>
+    </header>
+    
+    
+
+    <main>
+      <div>
+        <section class="category-row-1" id="netflixOriginals">
+          <div>
+            <h2 class="category-name">Netflix Originals</h2>
+            <div class="row-content" tabindex="0">
+              <!-- content will be generated dynamically -->
+            </div>
+          </div>
+        </section>
+        <section class="category-row-2" id="trendingNow">
+          <h2 class="category-name">Trending Now</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-3" id="topRated">
+          <h2 class="category-name">Top Rated</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-4" id="actionMovies">
+          <h2 class="category-name">Action Movies</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-5" id="comedyMovies">
+          <h2 class="category-name">Comedy Movies</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-6" id="horrorMovies">
+          <h2 class="category-name">Horror Movies</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-7" id="romanceMovies">
+          <h2 class="category-name">Romance Movies</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+        <section class="category-row-8" id="documentaries">
+          <h2 class="category-name">Documentaries</h2>
+          <div class="row-content" tabindex="0">
+            <!-- content will be generated dynamically -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

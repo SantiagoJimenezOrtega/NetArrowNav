@@ -1,0 +1,128 @@
+body {
+  font-family: Arial, sans-serif;
+  margin-left: 0.5;
+  padding: 0.5;
+  background-color: #141414;
+  overflow-x: hidden;
+  position: fixed;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav li:hover {
+  scale: 110%;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  align-items: baseline;
+  margin-left: 20px;
+  margin-top: 200px;
+}
+
+.category-name {
+  color: #fff;
+  position: relative;
+  padding-left: 30px;
+}
+
+.category-row {
+  margin-bottom: 20px;
+  height: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.category-row h2 {
+  margin-top: 0;
+  margin-bottom: 50;
+}
+
+.movieListElement {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 10px;
+}
+.row-content {
+  padding: 20px;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  white-space: nowrap; /* Prevent line breaks */
+  height: 220px; /* Set a fixed height for the row */
+}
+
+.thumbnail {
+  display: inline-block;
+  margin-right: 10px;
+  width: 250px; /* Set a fixed width for the thumbnails */
+  position: relative;
+}
+
+.thumbnail img {
+  width: 250px;
+  height: 150px;
+  object-fit: fill;
+  border-radius: 20px;
+  margin-right: 5%;
+}
+
+.thumbnail img:hover,
+.thumbnail:hover > img {
+  transform: scale(1.05);
+  transition: all;
+  transition-duration: 10ms;
+  border: 3px solid #ffffff;
+}
+
+.thumbnail:hover > img,
+.thumbnail:hover > h2 {
+  transform: scale(1.05);
+  transition: all;
+  transition-duration: 10ms;
+}
+
+.thumbnail.focused {
+  transform: scale(1.02);
+  transition: all;
+  transition-duration: 10ms;
+  border-radius: 20px;
+}
+
+.thumbnail h2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
