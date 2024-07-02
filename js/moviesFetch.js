@@ -202,7 +202,7 @@ document.addEventListener(
           }
         }
       }
-      console.log("Movie is located in this position/s ", moviePositions)
+      console.log("Movie is located in ",moviePositions.length, " diferent position/s ", moviePositions)
     }
   },
   true
