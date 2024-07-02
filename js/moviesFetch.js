@@ -25,6 +25,7 @@ async function fetchTmdbData(endpoint, options = {}) {
 let rowMovieArrays = [];
 /**/
 
+
 function renderMovieList(endpoint, containerId, rowNumber) {
   fetchTmdbData(endpoint)
     .then((response) => {
