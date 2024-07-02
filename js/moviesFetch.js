@@ -25,24 +25,28 @@ async function fetchTmdbData(endpoint, options = {}) {
 let rowMovieArrays = [];
 /**/
 
-function renderMovieList(endpoint, containerId) {
+function renderMovieList(endpoint, containerId, rowNumber) {
   fetchTmdbData(endpoint)
     .then((response) => {
-      const rowContentElement = document.querySelector(`#${containerId} .row-content`);
+      const rowContentElement = document.querySelector(
+        `#${containerId} .row-content`
+      );
       const movies = response.results;
 
       const movieListElement = document.createElement("div");
       movieListElement.className = "movieListElement";
 
       const moviePosition = {}; // <--- Add this object to store movie positions
-      const movieArray = [];   // <--- Add this array to store movie objects
+      const movieArray = []; // <--- Add this array to store movie objects
 
       movies.forEach((movie, index) => {
         const thumbnailElement = document.createElement("div");
         thumbnailElement.className = "thumbnail";
 
         const posterElement = document.createElement("img");
-        posterElement.src = `https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`;
+        posterElement.src = `https://image.tmdb.org/t/p/w500${
+          movie.backdrop_path || movie.poster_path
+        }`;
         posterElement.alt = movie.title || movie.original_name;
 
         const titleElement = document.createElement("h2");
@@ -50,10 +54,14 @@ function renderMovieList(endpoint, containerId) {
           "w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-red-500 md:text-2xl";
         titleElement.textContent = movie.title || movie.original_name;
 
-        
+        // Add movie description to the movie object
+        const descriptionElement = document.createElement("p");
+        descriptionElement.textContent = movie.overview;
+        descriptionElement.style.display = "none";
 
         thumbnailElement.appendChild(posterElement);
         thumbnailElement.appendChild(titleElement);
+        thumbnailElement.appendChild(descriptionElement);
 
         // Add tabindex here
         thumbnailElement.tabIndex = 0;
@@ -94,7 +102,11 @@ function renderMovieList(endpoint, containerId) {
         // Add movie to the object with its position
         moviePosition[movie.title || movie.original_name] = index + 1;
         // Add movie object to the array
-        movieArray.push({ name: movie.title || movie.original_name, position: index + 1 });
+        movieArray.push({
+          name: movie.title || movie.original_name,
+          position: index + 1,
+          rowNumber: rowNumber
+        });
 
         thumbnailElement.addEventListener("focus", () => {
           thumbnailElement.classList.add("focused");
@@ -111,7 +123,6 @@ function renderMovieList(endpoint, containerId) {
       rowContentElement.appendChild(movieListElement);
       // Log the movieArray to the console
       rowMovieArrays.push(movieArray);
-      
     })
     .catch((err) => console.error(err));
 }
@@ -120,38 +131,38 @@ function renderMovieList(endpoint, containerId) {
 Promise.all([
   renderMovieList(
     "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-    "netflixOriginals"
+    "netflixOriginals","1"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
-    "trendingNow"
+    "trendingNow","2"
   ),
   renderMovieList(
     "movie/top_rated?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-    "topRated"
+    "topRated","3"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=28",
-    "actionMovies"
+    "actionMovies","4"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=35",
-    "comedyMovies"
+    "comedyMovies","5"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=27",
-    "horrorMovies"
+    "horrorMovies","6"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=10749",
-    "romanceMovies"
+    "romanceMovies","7"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=99",
-    "documentaries"
+    "documentaries","8"
   ),
 ]).then(() => {
-  console.log('Fetched movies from tmdb -', rowMovieArrays);
+  console.log("Fetched movies from tmdb -", rowMovieArrays);
 });
 
 document.addEventListener("keydown", (event) => {
@@ -163,9 +174,36 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener(
   "focus",
   (event) => {
-    console.log("Focused element:", event.target);
+    const focusedElement = event.target;
+    if (focusedElement.classList.contains("thumbnail")) {
+      const movieTitle = focusedElement.querySelector("h2").textContent;
+      const movieDescription = focusedElement.querySelector("p").textContent;
+      console.log(
+        `Focused movie: ${movieTitle}, Description: ${movieDescription}`
+      );
+      let moviePosition=0;
+      let contRows = -1;
+      let contMovies = -1;
+
+      // Find the movie in the rowMovieArrays
+      let rowIndex = -1;
+      let movieIndex = -1;
+      let moviePositions=[];
+      for (let i = 0; i < rowMovieArrays.length; i++) {
+        for (let j = 0; j < rowMovieArrays[i].length; j++) {
+          if (rowMovieArrays[i][j].name === movieTitle) {
+            rowIndex = i;
+            movieIndex = j;
+            moviePosition = rowMovieArrays[i][j].position;
+            moviePositions.push({
+              rowNumber: rowMovieArrays[i][j].rowNumber,
+              position: rowMovieArrays[i][j].position
+            });
+          }
+        }
+      }
+      console.log("Movie is located in this position/s ", moviePositions)
+    }
   },
   true
 );
-
-

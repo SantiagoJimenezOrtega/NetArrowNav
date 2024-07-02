@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin-left: 0.5;
@@ -83,6 +87,7 @@ main {
   width: 250px; /* Set a fixed width for the thumbnails */
   position: relative;
 }
+
 
 .thumbnail img {
   width: 250px;
