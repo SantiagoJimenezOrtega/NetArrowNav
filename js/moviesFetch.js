@@ -22,26 +22,27 @@ async function fetchTmdbData(endpoint, options = {}) {
   }
 }
 /**/
+let rowMovieArrays = [];
+/**/
 
 function renderMovieList(endpoint, containerId) {
   fetchTmdbData(endpoint)
     .then((response) => {
-      const rowContentElement = document.querySelector(
-        `#${containerId} .row-content`
-      );
+      const rowContentElement = document.querySelector(`#${containerId} .row-content`);
       const movies = response.results;
 
       const movieListElement = document.createElement("div");
       movieListElement.className = "movieListElement";
 
-      movies.forEach((movie) => {
+      const moviePosition = {}; // <--- Add this object to store movie positions
+      const movieArray = [];   // <--- Add this array to store movie objects
+
+      movies.forEach((movie, index) => {
         const thumbnailElement = document.createElement("div");
         thumbnailElement.className = "thumbnail";
 
         const posterElement = document.createElement("img");
-        posterElement.src = `https://image.tmdb.org/t/p/w500${
-          movie.backdrop_path || movie.poster_path
-        }`;
+        posterElement.src = `https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`;
         posterElement.alt = movie.title || movie.original_name;
 
         const titleElement = document.createElement("h2");
@@ -88,6 +89,11 @@ function renderMovieList(endpoint, containerId) {
           }
         });
 
+        // Add movie to the object with its position
+        moviePosition[movie.title || movie.original_name] = index + 1;
+        // Add movie object to the array
+        movieArray.push({ name: movie.title || movie.original_name, position: index + 1 });
+
         thumbnailElement.addEventListener("focus", () => {
           thumbnailElement.classList.add("focused");
         });
@@ -101,19 +107,24 @@ function renderMovieList(endpoint, containerId) {
       });
 
       rowContentElement.appendChild(movieListElement);
+      // Log the movieArray to the console
+      rowMovieArrays.push(movieArray);
+      
+      console.log('movies in rowMovieArrays', rowMovieArrays);
     })
     .catch((err) => console.error(err));
 }
 
 // Call the function for each endpoint
 renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
-  "trendingNow"
-);
-renderMovieList(
   "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
   "netflixOriginals"
 );
+renderMovieList(
+  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
+  "trendingNow"
+);
+
 renderMovieList(
   "movie/top_rated?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
   "topRated"
@@ -137,7 +148,9 @@ renderMovieList(
 renderMovieList(
   "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=99",
   "documentaries"
+  
 );
+
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
@@ -152,3 +165,5 @@ document.addEventListener(
   },
   true
 );
+
+
