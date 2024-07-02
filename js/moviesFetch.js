@@ -50,6 +50,8 @@ function renderMovieList(endpoint, containerId) {
           "w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-red-500 md:text-2xl";
         titleElement.textContent = movie.title || movie.original_name;
 
+        
+
         thumbnailElement.appendChild(posterElement);
         thumbnailElement.appendChild(titleElement);
 
@@ -110,47 +112,47 @@ function renderMovieList(endpoint, containerId) {
       // Log the movieArray to the console
       rowMovieArrays.push(movieArray);
       
-      console.log('movies in rowMovieArrays', rowMovieArrays);
     })
     .catch((err) => console.error(err));
 }
 
 // Call the function for each endpoint
-renderMovieList(
-  "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-  "netflixOriginals"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
-  "trendingNow"
-);
-
-renderMovieList(
-  "movie/top_rated?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-  "topRated"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=28",
-  "actionMovies"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=35",
-  "comedyMovies"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=27",
-  "horrorMovies"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=10749",
-  "romanceMovies"
-);
-renderMovieList(
-  "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=99",
-  "documentaries"
-  
-);
-
+Promise.all([
+  renderMovieList(
+    "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
+    "netflixOriginals"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
+    "trendingNow"
+  ),
+  renderMovieList(
+    "movie/top_rated?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
+    "topRated"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=28",
+    "actionMovies"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=35",
+    "comedyMovies"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=27",
+    "horrorMovies"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=10749",
+    "romanceMovies"
+  ),
+  renderMovieList(
+    "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=99",
+    "documentaries"
+  ),
+]).then(() => {
+  console.log('Fetched movies from tmdb -', rowMovieArrays);
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
