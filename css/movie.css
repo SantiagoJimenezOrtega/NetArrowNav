@@ -1,0 +1,39 @@
+body {
+  background-image: url("image.jpg");
+  background-size: auto;
+  background-position: center;
+  filter: contrast(1s) brightness(1.1) saturate(1.5); /* adjust values to taste */
+}
+
+.movie-info {
+  top: 40%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: #fff;
+}
+
+.title {
+  margin-left: 1.5%;
+  font-size: 6em;
+  text-shadow: #585858;
+  width: 1000px;
+}
+
+.overview {
+  margin-top: 5%;
+  font-size: 1.5em;
+  width: 750px;
+  justify-content: flex-start;
+}
+
+.focused {
+  transform: scale(1.02);
+  transition: all;
+  transition-duration: 10ms;
+}
+
+.return-button {
+  /* ... */
+  outline: none;
+}

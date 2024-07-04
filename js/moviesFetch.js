@@ -96,6 +96,17 @@ function renderMovieList(endpoint, containerId, rowNumber) {
                 firstThumbnail.focus();
               }
             }
+          } else if (event.key === "Enter") {
+            const movieTitle = thumbnailElement.querySelector("h2").textContent;
+            const movie = movies.find(
+              (movie) =>
+                movie.title === movieTitle || movie.original_name === movieTitle
+            );
+            const backdropUrl = `https://image.tmdb.org/t/p/original${
+              movie.backdrop_path || movie.poster_path
+            }`;
+            const movieOverview = movie.overview;
+            window.location.href = `movie.html?title=${movieTitle}&backdrop=${backdropUrl}&overview=${movieOverview}`;
           }
         });
 
@@ -105,7 +116,7 @@ function renderMovieList(endpoint, containerId, rowNumber) {
         movieArray.push({
           name: movie.title || movie.original_name,
           position: index + 1,
-          rowNumber: rowNumber
+          rowNumber: rowNumber,
         });
 
         thumbnailElement.addEventListener("focus", () => {
@@ -131,35 +142,43 @@ function renderMovieList(endpoint, containerId, rowNumber) {
 Promise.all([
   renderMovieList(
     "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-    "netflixOriginals","1"
+    "netflixOriginals",
+    "1"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
-    "trendingNow","2"
+    "trendingNow",
+    "2"
   ),
   renderMovieList(
     "movie/top_rated?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
-    "topRated","3"
+    "topRated",
+    "3"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=28",
-    "actionMovies","4"
+    "actionMovies",
+    "4"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=35",
-    "comedyMovies","5"
+    "comedyMovies",
+    "5"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=27",
-    "horrorMovies","6"
+    "horrorMovies",
+    "6"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=10749",
-    "romanceMovies","7"
+    "romanceMovies",
+    "7"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US&with_genres=99",
-    "documentaries","8"
+    "documentaries",
+    "8"
   ),
 ]).then(() => {
   console.log("Fetched movies from tmdb -", rowMovieArrays);
@@ -181,14 +200,14 @@ document.addEventListener(
       console.log(
         `Focused movie: ${movieTitle}, Description: ${movieDescription}`
       );
-      let moviePosition=0;
+      let moviePosition = 0;
       let contRows = -1;
       let contMovies = -1;
 
       // Find the movie in the rowMovieArrays
       let rowIndex = -1;
       let movieIndex = -1;
-      let moviePositions=[];
+      let moviePositions = [];
       for (let i = 0; i < rowMovieArrays.length; i++) {
         for (let j = 0; j < rowMovieArrays[i].length; j++) {
           if (rowMovieArrays[i][j].name === movieTitle) {
@@ -197,12 +216,17 @@ document.addEventListener(
             moviePosition = rowMovieArrays[i][j].position;
             moviePositions.push({
               rowNumber: rowMovieArrays[i][j].rowNumber,
-              position: rowMovieArrays[i][j].position
+              position: rowMovieArrays[i][j].position,
             });
           }
         }
       }
-      console.log("Movie is located in ",moviePositions.length, " diferent position/s ", moviePositions)
+      console.log(
+        "Movie is located in ",
+        moviePositions.length,
+        " diferent position/s ",
+        moviePositions
+      );
     }
   },
   true
