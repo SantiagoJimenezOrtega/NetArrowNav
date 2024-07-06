@@ -51,3 +51,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+angular.module("myApp", ["caph.focus"]).controller("myController", [
+  "$scope",
+  "FocusConstant",
+  "focusController",
+  "nearestFocusableFinder",
+  function ($scope, FocusConstant, focusController, nearestFocusableFinder) {
+    $scope.focusRight = function (from) {
+      focusController.focus(
+        nearestFocusableFinder.getNearest(from, FocusConstant.DIRECTION.RIGHT)
+      );
+    };
+  },
+]);
