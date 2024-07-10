@@ -35,7 +35,6 @@ body {
 }
 
 .focused {
-  transform: scale(1.1);
   transition: all;
   transition-duration: 10ms;
   filter: brightness(20);
@@ -166,9 +165,10 @@ body {
 }
 /*Buttons Focus*/
 .action-button.focused {
+  transform: scale(1.03);
   background-color: white;
   color: rgb(0, 0, 0);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .action-button.focused .play-icon {
   filter: invert(0);
