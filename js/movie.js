@@ -26,19 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("Thumbnail URL is empty or invalid");
   }
-  /** */
-  document.addEventListener(
-    "focus",
-    function (event) {
-      console.log("Focused element:", event.target);
-    },
-    true
-  );
+
   /** */
   // Get the return button element
   const returnButton = document.querySelector(".return-button");
-
-  console.log(returnButton); // Should log the return button element
 
   // Add tabindex to make the return button focusable
   returnButton.tabIndex = 0;

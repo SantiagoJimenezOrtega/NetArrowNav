@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/movie.css" />
     <!-- include CAPH 3.0.1 default package -->
     <link
       href="lib/caph/3.0.1/caph.min.css"
@@ -21,57 +18,112 @@
     ></script>
     <!-- include the CAPH Package for AngularJS -->
     <script src="lib/caph/3.0.1/caph-angular.min.js"></script>
-
+    <link rel="stylesheet" href="css/movie.css" />
     <title>Selected Movie</title>
-    <style>
-      body {
-        background-image: url("");
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        margin: 0;
-        overflow-y: hidden;
-        overflow-x: hidden;
-      }
-      .return-button {
-        position: absolute;
-        color: white;
-        left: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        z-index: 2;
-      }
-      .gradient-overlay {
-        position: static;
-        width: 80%;
-        height: 100vh;
-        background: rgb(2, 0, 36);
-        background: linear-gradient(
-          90deg,
-          rgba(2, 0, 36, 1) 0%,
-          rgba(0, 0, 0, 0) 100%,
-          rgba(0, 212, 255, 1) 100%
-        );
-        z-index: 1;
-      }
-      .movie-info {
-        position: fixed;
-        z-index: 2;
-        color: #fff;
-      }
-      .title {
-        font-weight: bold;
-      }
-      .overview {
-        text-align: justify;
-        padding: 20px;
-      }
-    </style>
   </head>
+  <style>
+    body {
+      background-image: url("");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+    .return-button {
+      position: absolute;
+      color: rgb(178, 178, 178);
+      left: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .gradient-overlay {
+      position: initial;
+      width: 80%;
+      height: 100vh;
+      background: rgb(2, 0, 36);
+      background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(0, 0, 0, 0) 100%,
+        rgba(0, 212, 255, 1) 100%
+      );
+      z-index: 1;
+    }
+    .movie-info {
+      position: fixed;
+      z-index: 2;
+      color: #fff;
+    }
+    .title {
+      font-weight: bold;
+    }
+    .overview {
+      text-align: justify;
+      padding: 20px;
+    }
+    
+
+    .step-box {
+      padding: 17px;
+      width: 950px;
+      background-color: #f1f1f1;
+    }
+    .step-box > .title > b:first-child {
+      font-size: 20px;
+    }
+    .step-box > .code {
+      margin-top: 20px;
+      color: #666666;
+      border-left: 4px solid #009688;
+      width: 80%;
+      margin-left: 68px;
+      padding-left: 2%;
+      line-height: 170%;
+      background-color: white;
+    }
+    .list-container {
+      height: 330px;
+    }
+    a {
+      text-decoration: none;
+    }
+    a:link {
+      color: gray;
+    }
+    a:visited {
+      color: gray;
+    }
+    html,
+    body {
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      margin-top: -2.8%;
+      font-family: tahoma;
+      font-size: 17px;
+      width: 1000px;
+      font-weight: 500;
+    }
+    .wrapper h1 {
+      font-weight: 500;
+    }
+    .footer {
+      margin: 30px 0;
+    }
+    .content {
+      margin: 40px 0;
+    }
+  </style>
   <script>
     var myApp = angular.module("myApp", ["caph.focus"]);
-    myApp.controller("myController", function ($scope) {
+    myApp.controller("myController", function ($scope, $focus) {
       $scope.focus = function ($event) {
+        console.log("Focused element:", $event.target);
         $($event.currentTarget).css({
           border: "3px solid red",
         });
@@ -86,52 +138,102 @@
       $scope.select = function ($event) {
         $($event.currentTarget).toggleClass("selected");
       };
+
+      $scope.handleKeyPress = function ($event) {
+  if (event.key === "Enter") { // Enter key
+    window.location.href = "index.html";
+  }
+};
+  document.addEventListener(
+  "focus",
+  function (event) {
+    console.log("Focused element:", document.activeElement);
+  },
+  true
+);
     });
   </script>
-  <body>
-    <div class="gradient-overlay" tabindex="-1">
-      <a
-        focusable
-        data-focusable-initial-focus="true"
-        on-focused="focus($event)"
-        on-blurred="blur($event)"
-        on-selected="select($event)"
-        href="index.html"
-        class="return-button"
-        tabindex="0"
-        role="button"
-      >
-        <img class="Home-Button" src="/image/izquierda.png" alt="Back Home" />
-      </a>
-      <div class="page-content">
-        <script src="js/movie.js"></script>
+  <body ng-app="myApp">
+    <div class="wrapper">
+      <div class="content">
+        <div class="list-container" ng-controller="myController">
+          <div class="gradient-overlay" tabindex="-1">
+            <a
+  focusable
+  data-focusable-initial-focus="true"
+  on-focused="focus($event)"
+  on-blurred="blur($event)"
+  on-selected="select($event)"
+  href="index.html"
+  class="return-button"
+  tabindex="0"
+  role="button"
+  ng-keypress="handleKeyPress($event)"
+>
+  <img
+    focusable
+    data-focusable-initial-focus="true"
+    class="Home-Button"
+    src="/image/izquierda.png"
+    alt="Back Home"
+  />
+</a>
+            <div class="page-content">
+              <script src="js/movie.js"></script>
+            </div>
+            <div class="icons-under-description">
+              <img
+                focusable
+                class="dislike"
+                src="/image/no-me-gusta.png"
+                alt="dislike-icon"
+              />
+              <img
+                focusable
+                class="like"
+                src="/image/no-me-gusta.png"
+                alt="like"
+              />
+              <img
+                focusable
+                class="love-it"
+                src="/image/love it.png"
+                alt="love-it"
+              />
+            </div>
+            <div class="buttons">
+              <button focusable class="action-button">
+                <img class="play-icon" src="/image/play.png" alt="play-icon" />
+                Play
+              </button>
+              <button focusable class="action-button">
+                <img
+                  class="play-icon"
+                  src="/image/play.png"
+                  alt="play-icon"
+                />Play Trailer
+              </button>
+              <button focusable class="action-button">
+                <img
+                  class="play-icon"
+                  src="/image/play.png"
+                  alt="play-icon"
+                />More Like This
+              </button>
+              <button focusable class="action-button">
+                <img
+                  class="play-icon"
+                  src="/image/play.png"
+                  alt="play-icon"
+                />Favorites
+              </button>
+            </div>
+          </div>
+          
+          </div>
+        </div>
       </div>
-      <div class="icons-under-description">
-        <img class="dislike" src="/image/no-me-gusta.png" alt="dislike-icon" />
-        <img class="like" src="/image/no-me-gusta.png" alt="like" />
-        <img class="love-it" src="/image/love it.png" alt="love-it" />
-      </div>
-      <div class="buttons">
-        <button focusable class="action-button">
-          <img class="play-icon" src="/image/play.png" alt="play-icon" />
-          Play
-        </button>
-        <button focusable class="action-button">
-          <img class="play-icon" src="/image/play.png" alt="play-icon" />Play
-          Trailer
-        </button>
-        <button focusable class="action-button">
-          <img class="play-icon" src="/image/play.png" alt="play-icon" />More
-          Like This
-        </button>
-        <button focusable class="action-button">
-          <img
-            class="play-icon"
-            src="/image/play.png"
-            alt="play-icon"
-          />Favorites
-        </button>
-      </div>
+      <div class="footer"></div>
     </div>
   </body>
 </html>

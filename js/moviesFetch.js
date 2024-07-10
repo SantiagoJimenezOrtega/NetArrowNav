@@ -105,6 +105,7 @@ function renderMovieList(endpoint, containerId, rowNumber) {
             const backdropUrl = `https://image.tmdb.org/t/p/original${
               movie.backdrop_path || movie.poster_path
             }`;
+
             const movieOverview = movie.overview;
             window.location.href = `movie.html?title=${movieTitle}&backdrop=${backdropUrl}&overview=${movieOverview}`;
           }
@@ -119,6 +120,8 @@ function renderMovieList(endpoint, containerId, rowNumber) {
           rowNumber: rowNumber,
         });
 
+        
+
         thumbnailElement.addEventListener("focus", () => {
           thumbnailElement.classList.add("focused");
         });
@@ -132,18 +135,19 @@ function renderMovieList(endpoint, containerId, rowNumber) {
       });
 
       rowContentElement.appendChild(movieListElement);
-      // Log the movieArray to the console
+
       rowMovieArrays.push(movieArray);
     })
     .catch((err) => console.error(err));
 }
 
-// Call the function for each endpoint
+// Call the function for each endpoint.
 Promise.all([
   renderMovieList(
     "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
     "netflixOriginals",
-    "1"
+    "1",
+    true // add autofocus to the first element of this list
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
@@ -181,6 +185,15 @@ Promise.all([
     "8"
   ),
 ]).then(() => {
+  rowMovieArrays.forEach((movieArray, index) => {
+    if (index === 0) {
+      movieArray.forEach((movie, movieIndex) => {
+        if (movieIndex === 0) {
+          movie.autofocus = true;
+        }
+      });
+    }
+  });
   console.log("Fetched movies from tmdb -", rowMovieArrays);
 });
 
@@ -190,6 +203,41 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+document.addEventListener(
+  "focus",
+  (event) => {
+    const focusedElement = event.target;
+    if (focusedElement.classList.contains("thumbnail")) {
+      const movieTitle = focusedElement.querySelector("h2").textContent;
+      const movieDescription = focusedElement.querySelector("p").textContent;
+      console.log(
+        `Focused movie: ${movieTitle}, Description: ${movieDescription}`
+      );
+
+      // Update the focused movie image
+      const focusedMovieImage = document.getElementById("focused-movie-image");
+      const moviePosterUrl = `https://image.tmdb.org/t/p/original${
+        focusedElement.querySelector("img").src.split("w500")[1]
+      }`;
+      focusedMovieImage.src = moviePosterUrl;
+
+      // Update the movie title and overview
+      const movieTitleElement = document.querySelector(".movie-title");
+      const movieOverviewElement = document.querySelector(".movie-overview");
+      movieTitleElement.textContent = movieTitle;
+      movieOverviewElement.textContent = movieDescription;
+
+      // Limit the overview length to 150 characters
+      const maxLength = 150;
+      const truncatedOverview = movieDescription.substring(0, maxLength);
+      if (movieDescription.length > maxLength) {
+        truncatedOverview += "See More"; // add an ellipsis if the text is truncated
+      }
+      movieOverviewElement.textContent = truncatedOverview;
+    }
+  },
+  true
+);
 document.addEventListener(
   "focus",
   (event) => {
