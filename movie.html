@@ -11,6 +11,8 @@
   <script src="lib/caph/3.0.1/caph-angular.min.js"></script>
   <link rel="stylesheet" href="css/movie.css" />
   <title>Selected Movie</title>
+  
+  </head>
 </head>
 <style>
   body {
@@ -165,18 +167,12 @@
   });
 </script>
 
-<body ng-app="myApp">
-  <div class="wrapper">
+<body >
+  <div class="wrapper" ng-app="myApp">
     <div class="content">
       <div class="list-container" ng-controller="myController">
         <div class="gradient-overlay" tabindex="-1" ng-controller="myController">
-          <a focusable  href="index.html" class="return-button" tabindex="0"
-            role="button">
-            <img focusable data-focusable-initial-focus="true" tabindex="0" class="Home-Button"
-              src="/image/izquierda.png" alt="Back Home" ng-keypress="handleKeyPress($event)" />
-          </a>
-          <!--... -->
-
+          
           <div class="page-content">
             <script src="js/movie.js"></script>
           </div>
@@ -186,7 +182,7 @@
             <img focusable class="love-it" src="/image/love it.png" alt="love-it" />
           </div>
           <div class="buttons">
-            <button focusable class="action-button">
+            <button focusable data-focusable-initial-focus="true" class="action-button">
               <img class="play-icon" src="/image/play.png" alt="play-icon" />
               Play
             </button>

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const backdropUrl = urlParams.get("backdrop");
   const movieTitle = urlParams.get("title");
 
-  const img = document.querySelector(".Home-Button");
+  const homeButton = document.querySelector(".Home-Button");
 
   if (backdropUrl) {
     document.body.style.backgroundImage = `url('${backdropUrl}')`;
@@ -31,10 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /** */
   // Get the return button element
-  const returnButton = document.querySelector(".return-button");
-
-  // Add tabindex to make the return button focusable
-  returnButton.tabIndex = 0;
+  const returnButton = document.querySelector(".index-link");
 
   // Add event listener to handle keyboard navigation
   returnButton.addEventListener("keydown", (event) => {
@@ -59,11 +56,8 @@ angular.module("myApp", ["caph.focus"]).controller("myController", [
   },
 ]);
 
-myApp.controller("myController", function ($scope, $focus) {
-  $scope.handleKeyPress = function ($event) {
-    if (event.key === "Enter") {
-      // Enter key
-      window.location.href = "index.html";
-    }
-  };
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Backspace" || event.keyCode === 8) {
+    window.location.href = "index.html";
+  }
 });
