@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const backdropUrl = urlParams.get("backdrop");
   const movieTitle = urlParams.get("title");
 
+  const img = document.querySelector(".Home-Button");
+
   if (backdropUrl) {
     document.body.style.backgroundImage = `url('${backdropUrl}')`;
     document.body.style.backgroundSize = "cover";
@@ -56,3 +58,12 @@ angular.module("myApp", ["caph.focus"]).controller("myController", [
     };
   },
 ]);
+
+myApp.controller("myController", function ($scope, $focus) {
+  $scope.handleKeyPress = function ($event) {
+    if (event.key === "Enter") {
+      // Enter key
+      window.location.href = "index.html";
+    }
+  };
+});
