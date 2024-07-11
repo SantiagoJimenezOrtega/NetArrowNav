@@ -8,8 +8,7 @@ body {
   padding: 0.5;
   background-color: #141414;
   overflow-x: hidden;
-  position: fixed;
-  overflow-y: hidden;
+  position: relative;
 }
 
 header {
@@ -47,6 +46,7 @@ nav a {
 
 main {
   align-items: baseline;
+  display: flexbox;
   margin-left: 0px;
   margin-top: 0px;
   padding-top: 0%;
@@ -80,9 +80,7 @@ main {
   z-index: 1; /* ensure the overlay is on top of the banner image */
 }
 .rows-content {
-  position: relative;
-  margin-top: 50px; /* adjust this value to match the height of your banner */
-  padding-top: 420px; /* adjust this value to match the height of your banner */
+  padding-top: 34%;
 }
 .movie-info {
   position: absolute;
@@ -121,6 +119,7 @@ main {
 
 .category-name {
   color: #fff;
+  font-weight: bold;
   position: relative;
   padding-left: 30px;
   font-size: large;
@@ -145,6 +144,7 @@ main {
 }
 .row-content {
   padding: 20px;
+  scroll-snap-type: mandatory;
   overflow-y: hidden; /* Prevent vertical scrolling */
   white-space: nowrap; /* Prevent line breaks */
   height: 220px; /* Set a fixed height for the row */

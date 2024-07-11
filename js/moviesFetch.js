@@ -23,6 +23,7 @@ async function fetchTmdbData(endpoint, options = {}) {
 }
 /**/
 let rowMovieArrays = [];
+let cont = 0;
 /**/
 
 function renderMovieList(endpoint, containerId, rowNumber) {
@@ -62,6 +63,7 @@ function renderMovieList(endpoint, containerId, rowNumber) {
         thumbnailElement.appendChild(posterElement);
         thumbnailElement.appendChild(titleElement);
         thumbnailElement.appendChild(descriptionElement);
+        console.log("esto es cont antes del if", cont);
 
         // Add tabindex here
         thumbnailElement.tabIndex = 0;
@@ -119,9 +121,24 @@ function renderMovieList(endpoint, containerId, rowNumber) {
           position: index + 1,
           rowNumber: rowNumber,
         });
-
-        
-
+        //
+        //Conditional to add initial focus to the first movie
+        if (cont === 0) {
+          thumbnailElement.setAttribute("autofocus", "true");
+          thumbnailElement.setAttribute("data-focusable-initial-focus", "true");
+          thumbnailElement.addEventListener("focused", (event) => {
+            // handle the "focused" event
+          });
+          thumbnailElement.addEventListener("blurred", (event) => {
+            // handle the "blurred" event
+          });
+          thumbnailElement.addEventListener("selected", (event) => {
+            // handle the "selected" event
+          });
+          cont++;
+          console.log(thumbnailElement.appendChild(titleElement));
+        }
+        //
         thumbnailElement.addEventListener("focus", () => {
           thumbnailElement.classList.add("focused");
         });
@@ -146,8 +163,7 @@ Promise.all([
   renderMovieList(
     "trending/all/week?api_key=ebaa273360a9678e5957480f6adda3b7&language=en-US",
     "netflixOriginals",
-    "1",
-    true // add autofocus to the first element of this list
+    "1"
   ),
   renderMovieList(
     "discover/movie?api_key=ebaa273360a9678e5957480f6adda3b7&with_networks=213",
