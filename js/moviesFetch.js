@@ -24,6 +24,7 @@ async function fetchTmdbData(endpoint, options = {}) {
 /**/
 let rowMovieArrays = [];
 let cont = 0;
+const selectedMovies = {};
 /**/
 
 function renderMovieList(endpoint, containerId, rowNumber) {
@@ -63,11 +64,11 @@ function renderMovieList(endpoint, containerId, rowNumber) {
         thumbnailElement.appendChild(posterElement);
         thumbnailElement.appendChild(titleElement);
         thumbnailElement.appendChild(descriptionElement);
-        console.log("esto es cont antes del if", cont);
 
         // Add tabindex here
         thumbnailElement.tabIndex = 0;
 
+        // Add event listeners for keyboard navigation here
         // Add event listeners for keyboard navigation here
         thumbnailElement.addEventListener("keydown", (event) => {
           if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
@@ -201,15 +202,6 @@ Promise.all([
     "8"
   ),
 ]).then(() => {
-  rowMovieArrays.forEach((movieArray, index) => {
-    if (index === 0) {
-      movieArray.forEach((movie, movieIndex) => {
-        if (movieIndex === 0) {
-          movie.autofocus = true;
-        }
-      });
-    }
-  });
   console.log("Fetched movies from tmdb -", rowMovieArrays);
 });
 
