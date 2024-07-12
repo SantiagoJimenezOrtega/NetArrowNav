@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     titleElement.className = "title";
     titleElement.textContent = movieTitle;
 
+    document.title = titleElement.textContent;
+
     const descriptionElement = document.createElement("p");
     descriptionElement.className = "overview";
     descriptionElement.textContent = urlParams.get("overview");
