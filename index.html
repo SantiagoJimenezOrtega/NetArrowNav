@@ -27,27 +27,84 @@
     <script src="lib/caph/3.0.1/caph-angular.min.js"></script>
   </head>
   <body>
-    <header>
-      <img src="/image/felix.png" alt="netflix logo" class="logo" />
-      <nav>
-        <ul>
-          <li><a href="/index.html">Home</a></li>
-          <li><a href="/index.html">Movies</a></li>
-          <li><a href="/index.html">TV Shows</a></li>
-          <li><a href="/index.html">Latest</a></li>
-          <li><a href="/index.html">My List</a></li>
+    <nav focusable class="sidenav" tabindex="1">
+      <ul>
+        <div class="user-whole">
+          <img
+            tabindex="2"
+            src="/image/userImage.png"
+            alt="user profile picture"
+            class="profile-image"
+          />
+          <div class="user-texts-navbar" >
+            
+              <b class="sidebar-text-user" > FELIX<b/>
+            
+            <li class="sidebar-text-user-switch">
+              <a focusable href="#" tabindex=""> <small> Switch user</small> </a>
+            </li>
+          </div>
+        </div>
+      </ul>
+      <div class="central-sidenavbar-info">
+        <ul >
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/lupa.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            /> Search</a>
+          </li>
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/hogar.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            />Home</a>
+          </li>
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/television.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            />Series</a>
+          </li>
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/claqueta.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            />Movies</a>
+          </li>
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/plus-pequeno.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            />My List</a>
+          </li>
+          <li>
+            <a href="#"><i class="central-icons"></i> <img
+              src="/image/iconsSideNavBar/calendario.png"
+              alt="search Icon"
+              class="sideNavBar-icon"
+            />New</a>
+          </li>
         </ul>
-      </nav>
-      <nav class="navRight">
-        <button class="button-user">Search</button>
-        <button class="button-user">Notifications</button>
-        <img
-          src="/image/userImage.png"
-          alt="user profile picture"
-          class="profile-image"
-        />
-      </nav>
-    </header>
+      </div>
+      <div class="down-sidenavbar-info">
+        <ul >
+          <li class="li-down">
+            <a href="#" class="down-text" ><i ></i> Settings</a>
+          </li>
+          <li class="li-down">
+            <a href="#" class="down-text" ><i ></i> Exit Felix</a>
+          </li>
+        </ul>
+      </div>
+      
+    </nav>
+    
 
     <main>
       <div class="banner">

@@ -82,6 +82,11 @@ function renderMovieList(endpoint, containerId, rowNumber) {
             const newThumbnail = movieListElement.children[newIndex];
             if (newThumbnail) {
               newThumbnail.focus();
+            } else if (event.key === "ArrowLeft" && currentIndex === 0) {
+              // If we're at the first thumbnail in the row and press left arrow,
+              // focus on the sidebar element
+              const sidebarElement = document.querySelector(".sidenav"); // adjust the selector to match your sidebar element
+              sidebarElement.focus();
             }
           } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
             // Navigate to previous/next row
@@ -114,6 +119,32 @@ function renderMovieList(endpoint, containerId, rowNumber) {
           }
         });
 
+        //** */
+        // Add an event listener to the sidebar element
+        const sidebarElement = document.querySelector(".sidenav");
+        sidebarElement.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowRight") {
+            // If we're in the sidebar and press right arrow,
+            // focus on the first thumbnail in the row
+            const rowElements = document.querySelectorAll(`.row-content`);
+            const firstRowElement = rowElements[0];
+            const firstThumbnail = firstRowElement.querySelector(".thumbnail");
+            if (firstThumbnail) {
+              firstThumbnail.focus();
+            }
+          }
+        });
+
+        // Add an event listener to the sidenav element
+        const sidenavElement = document.querySelector(".sidenav");
+        sidenavElement.addEventListener("focus", () => {
+          sidenavElement.classList.add("focused");
+        });
+
+        sidenavElement.addEventListener("blur", () => {
+          sidenavElement.classList.remove("focused");
+        });
+
         // Add movie to the object with its position
         moviePosition[movie.title || movie.original_name] = index + 1;
         // Add movie object to the array
@@ -123,6 +154,7 @@ function renderMovieList(endpoint, containerId, rowNumber) {
           rowNumber: rowNumber,
         });
         //
+
         //Conditional to add initial focus to the first movie
         if (cont === 0) {
           thumbnailElement.setAttribute("autofocus", "true");

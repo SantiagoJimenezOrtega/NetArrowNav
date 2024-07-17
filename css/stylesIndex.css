@@ -1,10 +1,145 @@
 .hidden {
   display: none;
 }
+/**/
+.profile-image {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  background-color: #333333f9;
+  padding: 20px;
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  border: #fff;
+  opacity: 10%;
+}
+
+.sidenav:hover {
+  transition: all;
+  transition-duration: 80ms;
+  opacity: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #333333f9;
+  padding: 20px;
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  border: #fff;
+}
+
+.sidenav.focused {
+  transition: all;
+  transition-duration: 80ms;
+  opacity: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #333333f9;
+  padding: 20px;
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+  border: #fff;
+}
+
+.sidenav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.sidenav li {
+  margin-bottom: 20px;
+}
+
+.sidenav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidenav a:hover {
+  color: #ccc;
+}
+
+.sidenav i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.sidebar-text-user {
+  margin-bottom: 0px;
+  padding: 0%;
+}
+.user-whole {
+  width: 150px;
+  display: flex;
+  margin-left: 0%;
+}
+.user-texts-navbar {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  padding: 0%;
+  margin: 0%;
+}
+.sidebar-text-user {
+  color: #fff;
+}
+.sidebar-text-user-switch {
+  color: #fff;
+  font-size: x-small;
+}
+
+.central-sidenavbar-info {
+  margin-top: 100%;
+  margin-bottom: 100%;
+}
+
+.sideNavBar-icon {
+  height: 20px;
+  filter: invert(1);
+  margin-right: 5px;
+}
+
+.down-sidenavbar-info {
+  height: 40px;
+  display: flex;
+}
+.li-down {
+  margin: 0%;
+  padding: 0%;
+  top: 0%;
+  right: 0%;
+}
+.down-text {
+  font-size: small;
+  margin: -10%;
+}
+
+/**/
 
 body {
   font-family: Arial, sans-serif;
-  margin-left: 0.5;
+  margin-left: 80px;
   padding: 0.5;
   background-color: #141414;
   overflow-x: hidden;
@@ -70,11 +205,6 @@ nav a {
   cursor: pointer;
 }
 
-.profile-image:hover {
-  cursor: pointer;
-  scale: 110%;
-}
-
 main {
   align-items: baseline;
   display: flexbox;
@@ -85,6 +215,7 @@ main {
 
 .banner {
   margin-top: 4.5%;
+  margin-left: 80px;
   margin-bottom: 0; /* remove the margin-bottom */
   position: fixed;
   top: 0;
@@ -112,7 +243,7 @@ main {
 
 .movie-info {
   position: absolute;
-  top: 50%; /* center the text vertically */
+  top: 35%; /* center the text vertically */
   left: 20px; /* adjust the left margin to your liking */
   transform: translateY(-50%); /* center the text vertically */
   color: #fff; /* set the text color to white */
@@ -140,7 +271,7 @@ main {
 .banner-image {
   position: relative;
   padding-left: 49%;
-  margin-top: -1%;
+  margin-top: -5%;
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   width: 100%;
@@ -149,7 +280,7 @@ main {
 
 .blurred-left-border {
   position: absolute;
-  top: -8%;
+  top: -20%;
   left: -10%;
   margin-left: 51%;
   bottom: 0%;
@@ -163,7 +294,7 @@ main {
 
 .gradient-overlay {
   position: absolute;
-  top: -8%;
+  top: -15%;
   left: -10%;
   bottom: 0%;
   width: 62%; /* adjust the width to control the overlay area */
