@@ -237,6 +237,7 @@ Promise.all([
   console.log("Fetched movies from tmdb -", rowMovieArrays);
 });
 
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" || event.key === "ArrowDown") {
     event.preventDefault();

@@ -13,17 +13,19 @@
   left: 0;
   width: 80px;
   height: 100%;
-  background-color: #333333f9;
+  background-color: #000000f9;
   padding: 20px;
   align-items: baseline;
   display: flex;
   flex-direction: column;
   z-index: 1001;
   border: #fff;
-  opacity: 10%;
+  opacity: 15%;
+  class: hidden-text; /* add this line */
 }
 
-.sidenav:hover {
+.sidenav:hover ~ .hidden {
+  display: block;
   transition: all;
   transition-duration: 80ms;
   opacity: 100%;
